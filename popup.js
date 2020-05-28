@@ -17,3 +17,9 @@ document.getElementById('replace').addEventListener('input', () => {
   const replace = replaceBox.value;
   chrome.runtime.sendMessage({ message: 'setReplace', replace });
 });
+
+document.addEventListener('keypress', function (e) {
+  if (e.keyCode == 13) {
+    window.close();
+  }
+});
