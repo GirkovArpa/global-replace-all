@@ -1,8 +1,8 @@
 'use strict';
 
 window.onload = function () {
-  chrome.runtime.sendMessage(null, response => {
-    console.log(`Replacing all <<${response.find}>> with <<${response.replace}>>.`);
+  chrome.runtime.sendMessage({ message: 'tabLoaded'}, response => {
+    console.log(`Replacing all << ${response.find} >> with << ${response.replace} >>.`);
     let myRegExp = new RegExp(response.find, 'g');
     [].forEach.call(
       document.querySelectorAll('input, textarea'),

@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "My Extension",
+  "name": "Global Replace All",
   "permissions": [
     "tabs", "activeTab"
   ],
@@ -18,7 +18,7 @@
   },
   "browser_action": {
     "default_icon": "icon16.png",
-    "default_title": "My Extension",
+    "default_title": "Global Replace All",
     "default_popup": "popup.html"
   },
   "content_scripts": [
