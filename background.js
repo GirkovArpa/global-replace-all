@@ -14,6 +14,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       resolve(tabList);
     });
   }).then(tabList => {
+    tabList.forEach(tab => chrome.tabs.sendMessage(tab.id, 'message'));
     sendResponse(tabList);
   });
   return true; // this means its async
