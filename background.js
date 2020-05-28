@@ -1,8 +1,6 @@
-chrome.browserAction.onClicked.addListener(tab => {
-  chrome.tabs.executeScript(null, { file: 'onClick.js' });
-});
+'use strict';
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+chrome.browserAction.onClicked.addListener(tab => {
   new Promise(async resolve => {
     let tabList = [];
     chrome.windows.getAll({ populate: true }, windows => {
@@ -14,10 +12,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       resolve(tabList);
     });
   }).then(tabList => {
-    tabList.forEach(tab => chrome.tabs.sendMessage(tab.id, 'message'));
+    tabList.forEach(tab => chrome.tabs.sendMessage(tab.id, { find: 'foo', replace: 'bar' }));
     sendResponse(tabList);
   });
-  return true; // this means its async
 });
-
-
