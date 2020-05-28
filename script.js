@@ -1,12 +1,12 @@
 'use strict';
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log(request);
-
-  let myRegExp = new RegExp(request.find, 'g');
-
-  [].forEach.call(
-    document.querySelectorAll('input, textarea'),
-    function (e) { e.value = e.value.replace(myRegExp, request.replace); }
-  );
-});
+window.onload = function () {
+  chrome.runtime.sendMessage(null, response => {
+    console.log(`Replacing all <<${response.find}>> with <<${response.replace}>>.`);
+    let myRegExp = new RegExp(response.find, 'g');
+    [].forEach.call(
+      document.querySelectorAll('input, textarea'),
+      function (e) { e.value = e.value.replace(myRegExp, response.replace); }
+    );
+  });
+}
