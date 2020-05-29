@@ -1,12 +1,23 @@
 'use strict';
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.message == 'replaceAll') {
+    replaceAll(request.find, request.replace);
+    sendResponse({ message: 'done ' });
+  }
+});
+
 window.onload = function () {
-  chrome.runtime.sendMessage({ message: 'tabLoaded'}, response => {
-    console.log(`Replacing all << ${response.find} >> with << ${response.replace} >>.`);
-    let myRegExp = new RegExp(response.find, 'g');
-    [].forEach.call(
-      document.querySelectorAll('input, textarea'),
-      function (e) { e.value = e.value.replace(myRegExp, response.replace); }
-    );
+  chrome.runtime.sendMessage({ message: 'tabLoaded' }, response => {
+    replaceAll(response.find, response.replace);
   });
+}
+
+function replaceAll(find, replace) {
+  console.log(`Replacing all << ${find} >> with << ${replace} >>.`);
+  let myRegExp = new RegExp(find, 'g');
+  [].forEach.call(
+    document.querySelectorAll('input, textarea'),
+    function (e) { e.value = e.value.replace(myRegExp, replace); }
+  );
 }

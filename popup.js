@@ -20,6 +20,7 @@ document.getElementById('replace').addEventListener('input', () => {
 
 document.addEventListener('keypress', function (e) {
   if (e.keyCode == 13) {
+    chrome.runtime.sendMessage({ message: 'replaceAll' });
     window.close();
   }
 });
