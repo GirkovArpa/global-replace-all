@@ -15,9 +15,13 @@ window.onload = function () {
 
 function replaceAll(find, replace) {
   console.log(`Replacing all << ${find} >> with << ${replace} >>.`);
-  let myRegExp = new RegExp(find, 'g');
+  let myRegExp = new RegExp(escapeRegExp(find), 'g');
   [].forEach.call(
     document.querySelectorAll('input, textarea'),
     function (e) { e.value = e.value.replace(myRegExp, replace); }
   );
+}
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
