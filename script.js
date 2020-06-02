@@ -15,7 +15,7 @@ window.onload = function () {
 
 function replaceAll(find, replace) {
   console.log(`Replacing all << ${find} >> with << ${replace} >>.`);
-  let myRegExp = new RegExp(escapeRegExp(find), 'g');
+  let myRegExp = new RegExp(escapeRegExp(find), 'gi');
   [].forEach.call(
     document.querySelectorAll('input, textarea'),
     function (e) { e.value = e.value.replace(myRegExp, replace); }
