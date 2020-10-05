@@ -7,11 +7,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-window.onload = function () {
+window.addEventListener('load', () => {
   chrome.runtime.sendMessage({ message: 'tabLoaded' }, response => {
-    replaceAll(response.find, response.replace);
+    replaceAll(response?.find || '', response?.replace || '');
   });
-}
+});
 
 function replaceAll(find, replace) {
   console.log(`Replacing all << ${find} >> with << ${replace} >>.`);
